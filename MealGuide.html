@@ -1,0 +1,63 @@
+<!DOCTYPE html>                     
+<html lang="EUC-KR">            // EUC-KR은 한글로 실행시키게 해줌
+<head>          
+    <title>급식알리미</title>   // 타이틀, 웹 실행하면 맨 위 탭창에 뜨는 그거 이름 설정해줌
+</head>
+<body>                          // body안에서 작성해야함. 전체적인 구조를 만듦
+
+    <p id="time">0:00:00</p>    // 현재 시간, p는 텍스트 출력, id는 변수명같은걸로 생각하면 됨, script에서 id이름을 말하면 그 텍스트나 사진을 변경할 수 있음
+
+    <p>                         // 급식 메뉴 출력, br은 줄바꿈 의미
+        <br>
+        차수수밥
+        <br>
+        <img  src="https://i.namu.wiki/i/8HnRiwDOQGjyf4JTiEBoVlwF6xAGJ9VTUspcCBQatul3BcEYHe2N59HGSo2sAbYUAYX7m2pMSdANHIkyK9vrkA.webp">  // 이미지 출력
+    </p>
+    
+    <script>                    // <script>가 <body>안에 있어야 함수 실행 딜레이(63번째 줄), 문제가 안생김. 프로그래밍을 하는 곳
+
+        function clock()        // 함수를 만듦
+        {
+
+            const now = new Date();                                     // Date()에 시간값 들어있음
+
+            const hours = String(now.getHours()).padStart(2, '0');      // now라는 Date()에서 현재 시간을 가져옴(시). padStart(2, '0')은 없는 자리 채워주기용, (ex) 12시 -> 12시, 6시 -> 06시
+            const minutes = String(now.getMinutes()).padStart(2, '0');  // now라는 Date()에서 현재 시간을 가져옴(분)
+            const seconds = String(now.getSeconds()).padStart(2, '0');  // now라는 Date()에서 현재 시간을 가져옴(초)
+
+            if( seconds >= 0 && seconds < 10 )                                      // 현재 시간(초)가 0 이상, 0 미만일때 중괄호 안에 있는 명령어를 실행
+            {
+                document.getElementById('time').style.backgroundColor = "red";      // id가 time로 되어있는 텍스트 색을 red로 변경
+            }
+            else if( seconds >= 10 && seconds < 20 )                                // 현재 시간(초)가 10 이상, 20 미만일때 중괄호 안에 있는 명령어를 실행
+            {
+                document.getElementById('time').style.backgroundColor = "yellow";   // id가 time로 되어있는 텍스트 색을 yellow로 변경
+            }
+            else if( seconds >= 20 && seconds < 30 )                                // 현재 시간(초)가 20 이상, 30 미만일때 중괄호 안에 있는 명령어를 실행
+            {
+                document.getElementById('time').style.backgroundColor = "green";    // id가 time로 되어있는 텍스트 색을 green로 변경
+            }
+            else if( seconds >= 30 && seconds < 40 )                                // 현재 시간(초)가 30 이상, 40 미만일때 중괄호 안에 있는 명령어를 실행
+            {
+                document.getElementById('time').style.backgroundColor = "blue";     // id가 time로 되어있는 텍스트 색을 blue로 변경
+            }
+            else if( seconds >= 40 && seconds < 50 )                                // 현재 시간(초)가 40 이상, 50 미만일때 중괄호 안에 있는 명령어를 실행
+            {
+                document.getElementById('time').style.backgroundColor = "purple";   // id가 time로 되어있는 텍스트 색을 purple로 변경
+            }
+            else if( seconds >= 50 && seconds < 60 )                                // 현재 시간(초)가 50 이상, 60 미만일때 중괄호 안에 있는 명령어를 실행
+            {
+                document.getElementById('time').style.backgroundColor = "pink";     // id가 time로 되어있는 텍스트 색을 pink로 변경
+            }
+
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;     //id가 time로 되어있는 텍스트를 변경 현재 시간으로 변경 (8번째 줄)
+            // 참고로 "",''는 문자값, ``는 숫자같은거 막 아무거나 받음
+        }
+
+        clock();                    //setInterval()만 있으면 작동할때 1초 되에 켜지는 문제가 발생함, 미리 함수 실행하는 코드임
+        setInterval(clock, 1000);   //1초마다 1번 함수를 실행함, (1000는 1초, 500은 0.5초) 숫자가 적으면 웹에 랙걸림(정확히는 성능 저하 문제 발생)
+
+    </script>
+
+</body>
+</html>
